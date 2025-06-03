@@ -90,6 +90,10 @@ func main() {
 	PopulateParams()
 	ArgsParser()
 
+	log := NewLogger()
+
+	http.NewServeMux()
+
 	http.Handle("/count", new(countHandler))
 	http.HandleFunc("/exit", Exit)
 
