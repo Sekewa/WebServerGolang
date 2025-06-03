@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	port   string = "8080"
+	port   string = ":8080"
 	params        = make([]string, 2)
 )
 
@@ -69,7 +69,7 @@ func ArgsParser() {
 				}
 
 				// on regarde si il n'y aurait pas un probleme avec le port
-				if err == nil {
+				if err != nil {
 					log.Println("Impossible de trouver un port utilisable, veuillez le rentrer dans ce format : xxxx, où x est un chiffre")
 
 				}
@@ -92,6 +92,9 @@ func main() {
 
 	http.Handle("/count", new(countHandler))
 	http.HandleFunc("/exit", Exit)
+
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/", fs)
 
 	http.ListenAndServe(port, nil)
 }
