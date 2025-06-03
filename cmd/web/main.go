@@ -8,7 +8,9 @@ import (
 	"slices"
 	"strconv"
 	"sync"
-	//"time"
+	"time"
+
+	"github.com/Sekewa/WebServerGolang/internal/utils"
 )
 
 var (
@@ -90,15 +92,29 @@ func main() {
 	PopulateParams()
 	ArgsParser()
 
-	log := NewLogger()
+	logger := utils.NewLogger()
 
-	http.NewServeMux()
+	mux := http.NewServeMux()
 
-	http.Handle("/count", new(countHandler))
-	http.HandleFunc("/exit", Exit)
+	mux.Handle("/count", new(countHandler))
+	mux.HandleFunc("/exit", Exit)
 
 	fs := http.FileServer(http.Dir("static"))
-	http.Handle("/", fs)
+	mux.Handle("/", fs)
 
-	http.ListenAndServe(port, nil)
+	loggedMux := utils.LoggingMiddleware(mux, logger)
+
+	srv := &http.Server{
+		Addr:         port,
+		Handler:      loggedMux,
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  120 * time.Second,
+	}
+
+	log.Println("Start of serveur on http://localhost", port)
+
+	if err := srv.ListenAndServe(); err != nil {
+		log.Fatalf("Server stopped : %v", err)
+	}
 }
