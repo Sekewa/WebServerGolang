@@ -1,5 +1,5 @@
 build:
-	go build -o WebServerGolang.exe cmd/web/main.go
+	go build -o out/WebServerGolang.exe cmd/web/main.go
 
 clean:
 	rm .\WebServerGolang.exe

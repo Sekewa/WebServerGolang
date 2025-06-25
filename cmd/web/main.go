@@ -1,22 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"time"
 
+	"github.com/Sekewa/WebServerGolang/internal/handlers"
 	"github.com/Sekewa/WebServerGolang/internal/utils"
 )
-
-/*
-Exemple supplementaire
-*/
-func Exit(w http.ResponseWriter, _ *http.Request) {
-	fmt.Fprintf(w, "BYE !!")
-	log.Fatal("BYE !!")
-}
 
 func main() {
 	params := utils.ArgsParser(os.Args)
@@ -25,9 +17,12 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	mux.Handle("/hello", new(handlers.helloHandler))
-	mux.HandleFunc("/exit", Exit)
+	// handler avec une struct
+	mux.Handle("/hello", new(handlers.HelloHandler))
+	// handler avec une fonction
+	mux.HandleFunc("/exit", handlers.Exit)
 
+	// handler avec un dossier
 	fs := http.FileServer(http.Dir("static"))
 	mux.Handle("/", fs)
 

@@ -3,13 +3,10 @@ package handlers
 import (
 	"fmt"
 	"net/http"
-	"sync"
 )
 
-type helloHandler struct {
-	mu sync.Mutex
-}
+type HelloHandler struct{}
 
-func (h *helloHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (h *HelloHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "everything is good\n")
 }
