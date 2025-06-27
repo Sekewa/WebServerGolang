@@ -20,7 +20,7 @@ func main() {
 	// handler avec une struct
 	mux.Handle("/hello", new(handlers.HelloHandler))
 	// handler avec une fonction
-	mux.HandleFunc("/exit", handlers.Exit)
+	mux.HandleFunc("/health", handlers.HealthCheck)
 
 	// handler avec un dossier
 	fs := http.FileServer(utils.SearchStatic())
