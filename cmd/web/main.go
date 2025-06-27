@@ -23,7 +23,7 @@ func main() {
 	mux.HandleFunc("/exit", handlers.Exit)
 
 	// handler avec un dossier
-	fs := http.FileServer(http.Dir("static"))
+	fs := http.FileServer(utils.SearchStatic())
 	mux.Handle("/", fs)
 
 	loggedMux := utils.LoggingMiddleware(mux, logger)
