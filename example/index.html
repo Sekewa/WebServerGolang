@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=VT323&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=VT323&display=swap" rel="stylesheet">
+
+    <title>Example Page</title>
+</head>
+<body>
+    <h1>Welcome to WebServerGolang !</h1>
+
+    <p id="text">
+        It's a simple (really simple) <span class="gras">Web Server Coded in Golang</span>.
+
+        <br><br>
+        You can either make it with the makefile and launch it in cmd or use the dockerfile to containerize it.
+        
+        <br><br>
+        
+        If you see this page its because ou didn't put the <span class="gras">static</span> dir with a index.html, here is an example :
+    </p>
+
+
+    <div id="code">
+        <p>
+            &nbsp;.<br>
+            ├──📂bin<br>
+            ├──📂cmd<br>
+            │       &emsp;&emsp;└──📁web<br>
+            ├──📂example<br>
+            │       &emsp;&emsp;├──📁css<br>
+            │       &emsp;&emsp;└── index.html<br>
+            ├──📂internal<br>
+            │       &emsp;&emsp;├──📁 handlers<br>
+            │       &emsp;&emsp;└──📁 utils<br>
+            ├──📁static (👈you need to create this one)<br>
+            ├──.gitignore<br>
+            ├──go.mod<br>
+            ├──Makefile<br>
+            └──README.md<br>
+        </p>
+    </div>
+
+    <p>If you want to put your own site you need to put it in the static folder.<br>This way the web server will know it need to use it.</p>
+</body>
+</html>
