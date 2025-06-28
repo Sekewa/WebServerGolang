@@ -5,11 +5,14 @@ import (
 	"strconv"
 )
 
+/*
+This function will return a map[string]string for all parameters possible
+*/
 func ArgsParser(args []string) map[string]string {
 	lenArgs := len(args)
 
 	mapParam := make(map[string]string)
-
+	// in case there is no port the user specified
 	mapParam["port"] = ":8080"
 
 	for i := 0; i < lenArgs; i++ {
@@ -18,30 +21,30 @@ func ArgsParser(args []string) map[string]string {
 		case "--p", "-port":
 
 			if i+1 <= lenArgs-1 {
-				// on recupere l'index d'apres pour avoir le parametres
+				// we get the second args
 				portTemp := args[i+1]
 
 				// conversion string -> int
 				_, err := strconv.Atoi(portTemp)
 
-				// on regarde si ce n'est pas un autre chose comme un des parametres
+				// we check if the second args is not a existing params
 				if contains(params, portTemp) {
 					log.Println("autre paramètre", portTemp)
 					mapParam["port"] = ":8080"
 					break
 				}
 
-				// on regarde si il n'y aurait pas un probleme avec le port
+				// we check if the port is parsable
 				if err != nil {
 					log.Println("Impossible de trouver un port utilisable, veuillez le rentrer dans ce format : xxxx, où x est un chiffre")
 					mapParam["port"] = ":8080"
 					break
 				}
 
-				// on avance la boucle d'1 sachant qu'on a traite correctement les informations
+				// arrived there we can +1 because the port is good
 				i += 1
 				mapParam["port"] = ":" + portTemp
-				log.Printf("Port : %s\n", mapParam["port"])
+				//log.Printf("Port : %s\n", mapParam["port"])
 			} else {
 				log.Println("il manque le port, par défaut 8080 sera utilisé")
 			}
