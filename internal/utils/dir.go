@@ -7,6 +7,11 @@ import (
 	"runtime"
 )
 
+/*
+This function will return the directory to use on the root path.
+If there is no static directory in this project it will just take the example on to return.
+If none a present it will stop the Web Server.
+*/
 func SearchStatic() http.Dir {
 	proj, err := os.Getwd()
 

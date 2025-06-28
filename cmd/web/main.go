@@ -17,17 +17,19 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	// handler avec une struct
+	// test handler that will return hello
 	mux.Handle("/hello", new(handlers.HelloHandler))
-	// handler avec une fonction
+	// handler that will return stat of this web server
 	mux.HandleFunc("/health", handlers.HealthCheck)
 
-	// handler avec un dossier
+	// handler of the example web site or static one
 	fs := http.FileServer(utils.SearchStatic())
 	mux.Handle("/", fs)
 
+	// logger that will log every interaction with the web server
 	loggedMux := utils.LoggingMiddleware(mux, logger)
 
+	// server struct
 	srv := &http.Server{
 		Addr:         params["port"],
 		Handler:      loggedMux,
